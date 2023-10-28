@@ -1,13 +1,4 @@
-FROM golang:1.21.1-alpine as builder
-RUN apk add --no-cache gcc musl-dev
+FROM golang:latest
+RUN go install github.com/cosmtrek/air@latest
 WORKDIR /app
-COPY go.mod go.sum ./
-RUN go mod download
-COPY . .
-RUN CGO_ENABLED=1 GOOS=linux go build -a -installsuffix cgo -o main .
-
-FROM alpine:latest
-WORKDIR /root/
-COPY --from=builder /app/main .
-EXPOSE 3001
-CMD ["./main"]
+ENTRYPOINT ["air"]
