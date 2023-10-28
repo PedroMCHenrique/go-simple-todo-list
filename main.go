@@ -1,7 +1,12 @@
 package main
 
-import "fmt"
+import (
+	"github.com/pedromchenrique/todo-list/config"
+)
 
 func main() {
-	fmt.Println("hello wolrd")
+	err := config.Init()
+	if err != nil {
+		panic(err)
+	}
 }
