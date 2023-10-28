@@ -7,7 +7,8 @@ import (
 )
 
 var (
-	db *gorm.DB
+	db     *gorm.DB
+	logger *Logger
 )
 
 func Init() error {
@@ -22,4 +23,9 @@ func Init() error {
 
 func GetDb() *gorm.DB {
 	return db
+}
+
+func GetLogger(prefix string) *Logger {
+	logger = NewLogger(prefix)
+	return logger
 }

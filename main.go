@@ -5,8 +5,10 @@ import (
 )
 
 func main() {
+	logger := config.GetLogger("main")
 	err := config.Init()
 	if err != nil {
-		panic(err)
+		logger.Errorf("Initializing error: %v", err)
+		return
 	}
 }
