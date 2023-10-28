@@ -1,19 +1,25 @@
 package router
 
 import (
-	"net/http"
-
 	"github.com/gin-gonic/gin"
+	"github.com/pedromchenrique/todo-list/handler"
 )
 
+type routes struct {
+	router *gin.Engine
+}
+
 func initializeRoutes(router *gin.Engine) {
+	handler.Init()
 	v1 := router.Group("/api/v1")
-	{
-		v1.GET("ping", func(ctx *gin.Context) {
-			ctx.Header("Content-Type", "application/json")
-			ctx.JSON(http.StatusOK, gin.H{
-				"message": "pong",
-			})
-		})
+
+	routes := routes{
+		router: router,
 	}
+	routes.Task(v1)
+}
+
+func (r *routes) Task(rg *gin.RouterGroup) {
+	task := rg.Group("/task")
+	task.POST("/", handler.CreateTask)
 }
