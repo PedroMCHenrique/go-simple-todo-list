@@ -5,11 +5,22 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/pedromchenrique/todo-list/schemas"
 )
 
 type ErrorResponse struct {
 	Message   string `json:"message"`
 	ErrorCode string `json:"errorCode"`
+}
+
+type CreateTaskResponse struct {
+	Message string               `json:"message"`
+	Data    schemas.TaskResponse `json:"data"`
+}
+
+type ListTaskResponse struct {
+	Message string                 `json:"message"`
+	Data    []schemas.TaskResponse `json:"data"`
 }
 
 func SendSuccess(ctx *gin.Context, op string, data interface{}) {

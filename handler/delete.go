@@ -7,6 +7,18 @@ import (
 	"github.com/pedromchenrique/todo-list/schemas"
 )
 
+// @BasePath /api/v1
+
+// @Summary Delete task
+// @Description Delete a task
+// @Tags tasks
+// @Accept json
+// @Produce json
+// @Param id query string true "task identification"
+// @Success 200 {object} CreateTaskResponse
+// @Failure 400 {object} ErrorResponse
+// @Failure 404 {object} ErrorResponse
+// @Router /task [delete]
 func Delete(ctx *gin.Context) {
 
 	id := ctx.Param("id")

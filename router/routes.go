@@ -20,9 +20,7 @@ func initializeRoutes(router *gin.Engine) {
 		router: router,
 	}
 	routes.Task(v1)
-	// routes.Docs(v1)
-	// docs.SwaggerInfo.BasePath = "/api/v1"
-	router.GET("/docs/*any", ginSwagger.WrapHandler(swaggerfiles.Handler, ginSwagger.URL("http://localhost:3001/api/v1docs/doc.json")))
+	routes.Docs(v1)
 }
 
 func (r *routes) Task(rg *gin.RouterGroup) {
@@ -34,9 +32,9 @@ func (r *routes) Task(rg *gin.RouterGroup) {
 	task.DELETE("/:id", handler.Delete)
 }
 
-// func (r *routes) Docs(rg *gin.RouterGroup) {
-// 	docs := rg.Group("/docs")
-// 	docs.GET("/*any", ginSwagger.WrapHandler(swaggerfiles.Handler,
-// 		ginSwagger.URL("http://localhost:3001/api/v1/docs/doc.json"),
-// 		ginSwagger.DefaultModelsExpandDepth(-1)))
-// }
+func (r *routes) Docs(rg *gin.RouterGroup) {
+	docs := rg.Group("/docs")
+	docs.GET("/*any", ginSwagger.WrapHandler(swaggerfiles.Handler,
+		ginSwagger.URL("http://localhost:3001/api/v1/docs/doc.json"),
+		ginSwagger.DefaultModelsExpandDepth(-1)))
+}

@@ -8,7 +8,6 @@ import (
 )
 
 // CreateTask godoc
-
 // @Summary Create task
 // @Description Create a new task
 // @Tags tasks
@@ -19,7 +18,6 @@ import (
 // @Failure 400 {object} ErrorResponse
 // @Failure 500 {object} ErrorResponse
 // @Router /task [post]
-
 func CreateTask(ctx *gin.Context) {
 	request := createTaskRequest{}
 	err := ctx.ShouldBindJSON(&request)

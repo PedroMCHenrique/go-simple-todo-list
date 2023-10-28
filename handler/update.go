@@ -7,6 +7,20 @@ import (
 	"github.com/pedromchenrique/todo-list/schemas"
 )
 
+// @BasePath /api/v1
+
+// @Summary Update task
+// @Description Update a task
+// @Tags tasks
+// @Accept json
+// @Produce json
+// @Param id query string true "task Identification"
+// @Param task body updateTaskRequest true "task data to Update"
+// @Success 200 {object} CreateTaskResponse
+// @Failure 400 {object} ErrorResponse
+// @Failure 404 {object} ErrorResponse
+// @Failure 500 {object} ErrorResponse
+// @Router /task [put]
 func Update(ctx *gin.Context) {
 	id := ctx.Param("id")
 	if id == "" {
