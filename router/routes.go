@@ -24,4 +24,5 @@ func (r *routes) Task(rg *gin.RouterGroup) {
 	task.POST("/", handler.CreateTask)
 	task.GET("/", handler.List)
 	task.GET("/:id", handler.Get)
+	task.PUT("/:id", handler.Update)
 }
