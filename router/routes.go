@@ -25,4 +25,5 @@ func (r *routes) Task(rg *gin.RouterGroup) {
 	task.GET("/", handler.List)
 	task.GET("/:id", handler.Get)
 	task.PUT("/:id", handler.Update)
+	task.DELETE("/:id", handler.Delete)
 }
