@@ -22,4 +22,5 @@ func initializeRoutes(router *gin.Engine) {
 func (r *routes) Task(rg *gin.RouterGroup) {
 	task := rg.Group("/task")
 	task.POST("/", handler.CreateTask)
+	task.GET("/", handler.List)
 }
