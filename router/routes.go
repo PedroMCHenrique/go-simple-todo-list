@@ -2,7 +2,10 @@ package router
 
 import (
 	"github.com/gin-gonic/gin"
+	_ "github.com/pedromchenrique/todo-list/docs"
 	"github.com/pedromchenrique/todo-list/handler"
+	swaggerfiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
 type routes struct {
@@ -17,6 +20,9 @@ func initializeRoutes(router *gin.Engine) {
 		router: router,
 	}
 	routes.Task(v1)
+	// routes.Docs(v1)
+	// docs.SwaggerInfo.BasePath = "/api/v1"
+	router.GET("/docs/*any", ginSwagger.WrapHandler(swaggerfiles.Handler, ginSwagger.URL("http://localhost:3001/api/v1docs/doc.json")))
 }
 
 func (r *routes) Task(rg *gin.RouterGroup) {
@@ -27,3 +33,10 @@ func (r *routes) Task(rg *gin.RouterGroup) {
 	task.PUT("/:id", handler.Update)
 	task.DELETE("/:id", handler.Delete)
 }
+
+// func (r *routes) Docs(rg *gin.RouterGroup) {
+// 	docs := rg.Group("/docs")
+// 	docs.GET("/*any", ginSwagger.WrapHandler(swaggerfiles.Handler,
+// 		ginSwagger.URL("http://localhost:3001/api/v1/docs/doc.json"),
+// 		ginSwagger.DefaultModelsExpandDepth(-1)))
+// }

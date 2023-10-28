@@ -7,6 +7,19 @@ import (
 	"github.com/pedromchenrique/todo-list/schemas"
 )
 
+// CreateTask godoc
+
+// @Summary Create task
+// @Description Create a new task
+// @Tags tasks
+// @Accept json
+// @Produce json
+// @Param request body createTaskRequest true "Request body"
+// @Success 200 {object} CreateTaskResponse
+// @Failure 400 {object} ErrorResponse
+// @Failure 500 {object} ErrorResponse
+// @Router /task [post]
+
 func CreateTask(ctx *gin.Context) {
 	request := createTaskRequest{}
 	err := ctx.ShouldBindJSON(&request)
