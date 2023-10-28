@@ -10,13 +10,10 @@ import (
 func CreateTask(ctx *gin.Context) {
 	request := createTaskRequest{}
 	err := ctx.ShouldBindJSON(&request)
-	ctx.Header("Content-Type", "application/json")
+
 	if err != nil {
 		logger.Errorf("error binding request: %v", err)
-		ctx.JSON(http.StatusBadRequest, gin.H{
-			"message": "error binding request",
-		})
-		return
+		SendError(ctx, http.StatusBadRequest, "error binding request")
 	}
 
 	newTask := schemas.Task{
@@ -29,12 +26,8 @@ func CreateTask(ctx *gin.Context) {
 
 	if err != nil {
 		logger.Errorf("error creating task")
-		ctx.JSON(http.StatusBadRequest, gin.H{
-			"message": "error creating task",
-		})
-		return
+		SendError(ctx, http.StatusBadRequest, "error creating task")
 	}
-	ctx.JSON(http.StatusCreated, gin.H{
-		"data": newTask,
-	})
+
+	SendSuccess(ctx, "create task", newTask)
 }
